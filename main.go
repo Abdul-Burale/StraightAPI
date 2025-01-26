@@ -4,6 +4,11 @@ import (
 	"fmt"
 	"net/http"
 	"log"
+	"time"
+
+	// TODO: Not in go ROUTE need to ADD
+	"TestBench/internal/models"
+	"TestBench/internal/utils"
 )
 
 func homePage(w http.ResponseWriter, r *http.Request) {
@@ -17,7 +22,40 @@ func handleRequests() {
 }
 	//	handleRequests()
 func main() {
-    http.HandleFunc("/", homePage) // registers the handler for this specific route
+
+	utils.LoadEnv()
+
+	mongoURI := utils.GetMongoURI()
+
+	client, err := mongo.Connect(nil, options.Client().ApplyURI(mongoURI))
+	if err != nil {
+		log.Fatalf("Error connecting to MongoDB: %v", err)
+	}
+
+	defer client.Disconnect(nil)
+
+	order := models.Order{
+		UserID:				"user1",
+		OrderNumber:		"0",
+		Items:	[]models.Item{
+			{Name: "Burger", Quantity: 2, 	Price: 5.99},
+			{Name: "Fries",  Quantity: 1,	Price: 2.99},
+		},
+		TotalAmount: 		14.97,
+		Status:				"pending",
+		CreatedAt:			time.Time(),
+		UpdatedAt:			time.Time(),
+	}
+
+	createdOrder, err := model.CreateOrder(client, &order)
+	if err != nil {
+		log.Fatalf("Error creating order: %v", err)
+	}
+
+	log.Printf("Created order: %+v," createdOrder)
+
+	http.HandleFunc("/", homePage) // registers the handler for this specific route
+
 
 	// ListenAndServe automatically generates a multiplexer
 	// mux handles the logic of separating routes with a function called ServeHTTP
