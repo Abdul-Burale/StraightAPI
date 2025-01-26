@@ -49,10 +49,10 @@ func main() {
 
 	createdOrder, err := model.CreateOrder(client, &order)
 	if err != nil {
-		log.Fatalf("Error creating order: %v", err)
+	log.Fatalf("Error creating order: %v", err)
 	}
 
-	log.Printf("Created order: %+v," createdOrder)
+	log.Printf("Created order: %+v,", createdOrder(&client, &order))
 
 	http.HandleFunc("/", homePage) // registers the handler for this specific route
 
