@@ -1,14 +1,16 @@
 package main
 
 import (
+	"StraightAPI/internal/models"
+	"StraightAPI/internal/utils"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"fmt"
 	"net/http"
 	"log"
 	"time"
 
 	// TODO: Not in go ROUTE need to ADD
-	"TestBench/internal/models"
-	"TestBench/internal/utils"
 )
 
 func homePage(w http.ResponseWriter, r *http.Request) {
@@ -43,16 +45,16 @@ func main() {
 		},
 		TotalAmount: 		14.97,
 		Status:				"pending",
-		CreatedAt:			time.Time(),
-		UpdatedAt:			time.Time(),
+		CreatedAt:			time.Now(),
+		UpdatedAt:			time.Now(),
 	}
 
-	createdOrder, err := model.CreateOrder(client, &order)
+	createdOrder, err := models.CreateOrder(client, &order)
 	if err != nil {
 	log.Fatalf("Error creating order: %v", err)
 	}
 
-	log.Printf("Created order: %+v,", createdOrder(&client, &order))
+	log.Printf("Created order: %+v,", createdOrder)
 
 	http.HandleFunc("/", homePage) // registers the handler for this specific route
 
