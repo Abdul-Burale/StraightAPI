@@ -41,9 +41,8 @@ func main() {
 		OrderNumber:		"0",
 		Items:	[]models.Item{
 			{Name: "Burger", Quantity: 2, 	Price: 5.99},
-			{Name: "Fries",  Quantity: 1,	Price: 2.99},
+			{Name: "Fries",  Quantity: 1,	Price: 3.99},
 		},
-		TotalAmount: 		14.97,
 		Status:				"pending",
 		CreatedAt:			time.Now(),
 		UpdatedAt:			time.Now(),
@@ -55,6 +54,19 @@ func main() {
 	}
 
 	log.Printf("Created order: %+v,", createdOrder)
+
+	updatedOrder, err := models.UpdateOrder(client, &order)
+	if err != nil {
+		log.Fatalf("Error creating order: %v", err)
+	}
+	log.Printf("Updated order %+v", updatedOrder)
+
+	// Deleted Order
+	deletedOrder, err := models.DeletedOrder(client, &order)
+	if err != nil {
+		log.Fatalf("Error deleting order: %v", err)
+	}
+	log.Printf("Deleted order %+v", deletedOrder)
 
 	http.HandleFunc("/", homePage) // registers the handler for this specific route
 
