@@ -23,3 +23,11 @@ func GetMongoURI() string {
 	// Return the value of the environment variable MONGO_URI
 	return os.Getenv("MONGO_URI")
 }
+
+func GetMongoDatabaseName() string {
+	return os.Getenv("DATABASE_NAME")
+}
+
+func GetMongoDatabaseCollection() string {
+	return os.Getenv("COLLECTION_NAME")
+}
