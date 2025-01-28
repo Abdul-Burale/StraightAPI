@@ -3,6 +3,7 @@ package main
 import (
 	"StraightAPI/internal/api"
 	"StraightAPI/internal/db"
+	"StraightAPI/internal/middleware"
 	"net/http"
 	"log"
 
@@ -21,8 +22,8 @@ func main() {
 	defer client.Disconnect(nil)
 
 
-	http.HandleFunc("/", api.HomePage) // registers the handler for this specific route
-	http.HandleFunc("/Home", api.HomePage)
+	http.HandleFunc("/", middleware.CorsMiddleware(api.HomePage)) // registers the handler for this specific route
+	http.HandleFunc("GET /Home", api.HomePage)
 
 	// ListenAndServe automatically generates a multiplexer
 	// mux handles the logic of separating routes with a function called ServeHTTP
