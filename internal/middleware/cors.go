@@ -1,6 +1,8 @@
 package middleware
 
 import (
+	"StraightAPI/internal/auth"
+	"context"
 	"log"
 	"net/http"
 )
@@ -32,5 +34,26 @@ func CorsMiddleware(nxt http.HandlerFunc) http.HandlerFunc {
 
 		log.Println("Passing request to next handler")
 		nxt(w, r)
+	}
+}
+
+func AuthMiddleware(nxt http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		authHeader := r.Header.Get("Authorization")
+		token, err := auth.VerifyIDToken(authHeader)
+		if err != nil {
+			http.Error(w, "Invalid or expired token", http.StatusUnauthorized)
+			return
+		}
+
+		userID := token.UID
+		if userID == "" {
+			http.Error(w, "UserID not found in token", http.StatusBadRequest)
+			return
+		}
+
+		log.Println("Successful Auth: User -> %v", userID)
+		context := context.WithValue(r.Context(), "userID", userID)
+		nxt(w, r.WithContext(context))
 	}
 }

@@ -31,3 +31,39 @@ func GetMongoDatabaseName() string {
 func GetMongoDatabaseCollection() string {
 	return os.Getenv("COLLECTION_NAME")
 }
+
+// FireBase Methods
+
+func GetFirebaseType() string {
+	return os.Getenv("FIREBASE_TYPE")
+}
+func GetFirebaseProjectID() string {
+	return os.Getenv("FIREBASE_PROJECT_ID")
+}
+func GetFirebasePrivateKeyID() string {
+	return os.Getenv("FIREBASE_PRIVATE_KEY_ID")
+}
+func GetFirebasePrivateKey() string {
+	return os.Getenv("FIREBASE_PRIVATE_KEY")
+}
+func GetFirebaseClientEmail() string {
+	return os.Getenv("FIREBASE_CLIENT_EMAIL")
+}
+func GetFirebaseClientID() string {
+	return os.Getenv("FIREBASE_CLIENT_ID")
+}
+func GetFirebaseAuth_URI() string {
+	return os.Getenv("FIREBASE_AUTH_URI")
+}
+func GetFirebaseToken_URI() string {
+	return os.Getenv("FIREBASE_TOKEN_URI")
+}
+func GetFirebaseAuthProviderX509Cert() string {
+	return os.Getenv("FIREBASE_AUTH_PROVIDER_X509_CERTL_URL")
+}
+func GetFirebaseClientX509Cert() string {
+	return os.Getenv("FIREBASE_CLIENT_X509_CERT_URL")
+}
+func GetFirebaseUniverseDomain() string {
+	return os.Getenv("FIREBASE_UNIVERSE_DOMAIN")
+}

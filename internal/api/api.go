@@ -11,6 +11,11 @@ func HomePage(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Endpoint Hit: homePage")
 }
 
+func SuccessAuth(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Successful Auth")
+	fmt.Println("Endpoint hit: SucessAuth")
+}
+
 /*
 func CreateOrderHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println("Recieved request to create order")
