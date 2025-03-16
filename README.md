@@ -21,7 +21,7 @@
 ### 1. Clone the repository:
 ```bash
 git clone https://github.com/Abdul-Burale/straightapi.git
-
+```
 ### 2. Install dependencies:
 Make sure Go is installed, and then run the following to install necessary packages:
 
@@ -29,72 +29,45 @@ Make sure Go is installed, and then run the following to install necessary packa
 go mod tidy
 3. Set up environment variables:
 Create a .env file in the root of the project and add the following variables:
+```
 
-ini
-Copy
+```ini
 MONGO_URI=your_mongodb_connection_string
 STRIPE_SECRET_KEY=your_stripe_secret_key
 FIREBASE_AUTH_KEY=your_firebase_auth_key
+```
+
 4. Run the project locally:
-bash
-Copy
+```bash
 go run main.go
+```
 The API will be available at http://localhost:8080.
 
-API Endpoints
-POST /orders
-Create a new order.
-Request Body:
 
-json
-Copy
-{
-  "product_id": "string",
-  "quantity": "integer",
-  "customer_name": "string",
-  "customer_email": "string"
-}
-POST /payment
-Generate a payment link using Stripe.
-Request Body:
+## **API Endpoints**
 
-json
-Copy
-{
-  "order_id": "string",
-  "amount": "float"
-}
-Deployment
-StraightAPI is hosted on Heroku for easy deployment. You can deploy it to your own Heroku account by following these steps:
+- **POST /orders**  
+  Create a new order.  
+  *Request Body:*
 
-Create a Heroku app:
+  ```json
+  {
+    "product_id": "string",
+    "quantity": "integer",
+    "customer_name": "string",
+    "customer_email": "string"
+  }
+  
+## **Still in Development**
 
-bash
-Copy
-heroku create
-Add MongoDB and Stripe configuration to your Heroku app:
+:construction: **StraightAPI** is a work in progress! New features, improvements, and bug fixes are being actively worked on. We encourage you to contribute or open an issue if you encounter any problems. Your feedback and contributions are highly appreciated!
 
-bash
-Copy
-heroku config:set MONGO_URI=your_mongodb_connection_string
-heroku config:set STRIPE_SECRET_KEY=your_stripe_secret_key
-Push the project to Heroku:
+## **Contributing**
 
-bash
-Copy
-git push heroku main
-Visit the Heroku app URL to access the API.
+We welcome contributions to **StraightAPI**! If you'd like to contribute, follow these steps:
 
-Still in Development
-StraightAPI is a work in progress. New features, improvements, and bug fixes are being actively worked on. Please feel free to contribute or open an issue if you encounter any problems.
+1. **Fork the repository** to your own GitHub account.
+2. **Create a new branch** for your feature or bug fix:
+   ```bash
+   git checkout -b feature-name
 
-Contributing
-If you'd like to contribute to the development of StraightAPI, feel free to fork the repository, make changes, and submit a pull request. Please ensure your code adheres to the project's coding style and includes tests where applicable.
-
-License
-This project is licensed under the MIT License.
-
-pgsql
-Copy
-
-Now you can simply copy this entire block and paste it into your README.md file on GitHub. It sho
